@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Lato';
+  src: url('/src/assets/fonts/Lato-Thin.ttf'), url('/src/assets/fonts/Lato-ThinItalic.ttf');
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/src/assets/fonts/Lato-Light.ttf'), url('/src/assets/fonts/Lato-LightItalic.ttf');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/src/assets/fonts/Lato-Regular.ttf'), url('/src/assets/fonts/Lato-Italic.ttf');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/src/assets/fonts/Lato-Bold.ttf'), url('/src/assets/fonts/Lato-BoldItalic.ttf');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/src/assets/fonts/Lato-Black.ttf'), url('/src/assets/fonts/Lato-BlackItalic.ttf');
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* color palette */
+
+/* 
+Paleta:
+
+Amarillo: #ECA539
+Rojo Presionado: #C00E20
+Rojo Seleccionado/Active: #F22539
+
+Escala de grises:
+Gris oscuro: #353535
+Gris oscuro-claro: #5E5E5E
+Gris claro: #BFBFBF
+
+Blanco oscuro: #E8E8E8 
+Blanco intermedio: #F5F5F5
+Blanco: #F9F9F9
+
+*/
+
+:root {
+  --vt-c-white: #f9f9f9;
+  --vt-c-white-soft: #f5f5f5;
+  --vt-c-white-mute: #e8e8e8;
+
+  --vt-c-black: #353535;
+  --vt-c-black-soft: #5e5e5e;
+  --vt-c-black-mute: #bfbfbf;
+
+  --vt-c-yellow: #eca539;
+  --vt-c-red: #c00e20;
+  --vt-c-red-mute: #f22539;
+
+  /* ! EDITAR */
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-black-mute);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+/* semantic color variables for this project */
+:root {
+  /* ! EDITAR */
+  --color-background: var(--vt-c-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-1);
+
+  --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* ! EDITAR */
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  
+  /* ! Custom Settings ---> */
+  height: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  text-rendering: optimizeSpeed;
+  /* !  <--- Custom Settings */
+
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
