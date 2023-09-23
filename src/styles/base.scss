@@ -1,0 +1,53 @@
+@import './_variables.scss';
+@import './_fonts.scss';
+@import './_color-themes.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+
+  /* ! Custom Settings ---> */
+  height: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  text-rendering: optimizeSpeed;
+  /* !  <--- Custom Settings */
+
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--color-disabled);
+    cursor: default;
+  }
+
+  &:active {
+    background-color: var(--color-active-button);
+    cursor: default;
+  }
+}
