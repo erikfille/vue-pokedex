@@ -51,3 +51,27 @@ button {
     cursor: default;
   }
 }
+
+input {
+  display: flex;
+  width: 315px;
+  height: 50px;
+  padding: 14px 15px;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 5px;
+  background: var(--color-absolute-white);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.04);
+
+  color: var(--color-input-text);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+
+  &::placeholder {
+    color: var(--color-placeholder);
+    line-height: 140%;
+  }
+}

@@ -3,7 +3,7 @@
 /* LIGHT THEME */
 :root {
   /* ! EDITAR */
-  --color-background: var(--vt-c-white);
+  --color-absolute-white: var(--vt-c-absolute-white) --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
 
@@ -13,8 +13,13 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
 
+  /* Button Colors */
   --color-disabled: var(--vt-c-divider-light-1);
   --color-active-button: var(--vt-c-red);
+
+  /* Input variables */
+  --color-input-text: var(--vt-c-black);
+  --color-placeholder: var(--vt-c-black-mute);
   --section-gap: 160px;
 }
 
