@@ -1,6 +1,6 @@
 <template>
     <div class="welcomeContainer">
-        <img class="welcomeImage" :src="landingImg" alt="Welcome Image">
+        <img class="welcomeImage" :src="landingImg" :style="imgStyle" alt="Welcome Image">
         <h1 class="welcomeTitle">Welcome to Pokédex</h1>
         <h3 class="welcomeDescription">The digital encyclopedia created by Professor Oak is an invaluable tool to Trainers
             in the Pokémon world.</h3>
@@ -12,17 +12,19 @@
 import pikachuWelcomeImg from "@/assets/images/pikachu-welcome.png"
 import { StyledButton } from '@/components/Inputs'
 
+
 export default {
     name: "WelcomeLanding",
     components: { StyledButton },
     data() {
         return {
             landingImg: pikachuWelcomeImg,
+            imgStyle: { width: '325px', height: 'auto' }
         };
     },
     methods: {
         redirectHandler() {
-            this.$router.push('/list')
+            this.$router.push({ name: 'List' })
         }
     }
 };
