@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .styledButton {
     display: flex;
     padding: 11px 20px;
@@ -48,13 +48,13 @@ export default {
 
     border-radius: 60px;
     background-color: #F22539;
-    color: var(--color-background);
+    color: var(--color-button-text);
 
     text-align: center;
     font-family: Lato;
-    font-size: 18px;
+    font-size: 17px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 700;
     line-height: normal;
 
     &:disabled {

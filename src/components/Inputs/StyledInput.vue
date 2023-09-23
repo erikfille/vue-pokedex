@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .inputContainer {
     position: relative;
     width: 315px;
