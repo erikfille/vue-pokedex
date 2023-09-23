@@ -1,6 +1,6 @@
 <template>
     <div class="inputContainer">
-        <img v-if="icon" class="inputIcon" src="@/assets/icons/looking-glass.svg" alt="icon" />
+        <img v-if="icon" class="inputIcon" :src="icon" alt="icon" />
         <input class="styledInput" :style="inputStyles" :placeholder="placeholder" :disabled="disabled"
             @click="() => handleInputChange()" />
     </div>
@@ -13,7 +13,7 @@ export default {
         name: { default: "styledInput" },
         inputStyles: { width: "315px", height: "50px" },
         placeholder: { default: "Search" },
-        icon: { default: "@/assets/icons/looking-glass.svg" },
+        icon: { default: "/src/assets/icons/looking-glass.svg" },
         inputAction: {
             type: Function,
             default: () => { }

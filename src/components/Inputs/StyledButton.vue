@@ -1,6 +1,7 @@
 <template>
-    <button class="styledButton" :style="buttonStyles" :disabled="disabled" @click="() => handleButtonClick()">{{
-        buttonText }}</button>
+    <button class="styledButton" :style="buttonStyles" :disabled="disabled" @click="() => handleButtonClick()"><img
+            v-if="buttonIcon" :src='buttonIcon' alt="Icon" /><span>{{
+                buttonText }}</span></button>
 </template>
 
 <script>
@@ -8,6 +9,8 @@ export default {
     name: "StyledButton",
     props: {
         buttonText: { default: "Get started" },
+        buttonIcon: "",
+        buttonAction: { type: Function, default: () => console.log("Se dispara la accion") },
         buttonStyles: {
             default: {
                 width: "130px",
@@ -17,7 +20,6 @@ export default {
         disabled: {
             default: false
         },
-        buttonAction: { type: Function, default: () => console.log("Se dispara la accion") }
     },
     data() {
         return {
@@ -30,36 +32,18 @@ export default {
         }
     },
     computed: {
-
     },
     created() {
-
+        console.log(this.$props)
     },
 };
 </script>
 
 <style scoped>
 .styledButton {
-    display: flex;
+    position: relative;
     padding: 11px 20px;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    border-radius: 60px;
-    background-color: #F22539;
-    color: var(--color-button-text);
-
-    text-align: center;
-    font-family: Lato;
     font-size: 17px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-
-    &:disabled {
-        background-color: var(--color-disabled);
-        cursor: default;
-    }
+    line-height: 0%;
 }
 </style>
