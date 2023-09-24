@@ -8,6 +8,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
   const favoritePokemon = ref([])
   const filteredPokemon = ref([])
   const pokemonDetail = ref({})
+  const actualSearch = ref('')
 
   const getAndFormatAllPokemon = async () => {
     try {
@@ -27,43 +28,61 @@ export const usePokemonStore = defineStore('pokemon', () => {
 
   const filterPokemon = (search, type) => {
     // LÓGICA PARA FILTRAR POKEMONS
-
-    console.log('search filter', search)
+    actualSearch.value = search
 
     if (type === 'list') {
       filteredPokemon.value = allPokemon.value
 
-      filteredPokemon.value = allPokemon.value.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
-      )
+      if (search)
+        filteredPokemon.value = allPokemon.value.filter((p) =>
+          p.name.toLowerCase().includes(search.toLowerCase())
+        )
     }
 
     if (type === 'favorites') {
-      filteredPokemon.value = favoritePokemon.value
+      filteredPokemon.value = allPokemon.value.filter((p) => p.isFavorite)
 
-      console.log("filteredPokemon", filteredPokemon.value)
-
-      filteredPokemon.value = favoritePokemon.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
-      )
+      if (search)
+        filteredPokemon.value = filteredPokemon.value.filter((p) =>
+          p.name.toLowerCase().includes(search.toLowerCase())
+        )
     }
   }
 
   const addFavorite = (id) => {
-    // Lógica para guardar un pokemon en favorito
-    this.favoritePokemon.push(id)
+    let favorites = [...new Set([...favoritePokemon.value, id])]
+    favoritePokemon.value = favorites
+
+    allPokemon.value = allPokemon.value.map((p) => {
+      if (p.id === id) p.isFavorite = true
+      return p
+    })
+
+    filteredPokemon.value = filteredPokemon.value.map((p) => {
+      if (p.id === id) p.isFavorite = true
+      return p
+    })
   }
 
   const removeFavorite = (id) => {
-    // Lógica para guardar un pokemon en favorito
-    this.favoritePokemon.filter((f) => f !== id)
+    favoritePokemon.value = favoritePokemon.value.filter((f) => f !== id)
+
+    allPokemon.value = allPokemon.value.map((p) => {
+      if (p.id === id) p.isFavorite = false
+      return p
+    })
+
+    filteredPokemon.value = filteredPokemon.value.map((p) => {
+      if (p.id === id) p.isFavorite = false
+      return p
+    })
+
+    filterPokemon(actualSearch.value, 'favorites')
   }
 
   const getPokemonDetails = async (name) => {
     // Logica para traer la info de un pókemon específico y disparar el modal de detalle
     let pokemon = await getPokemonByName(name)
-
-    console.log('pokemon', pokemon)
 
     this.pokemonDetail.value = pokemon
   }

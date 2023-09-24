@@ -3,10 +3,9 @@
         <StyledInput v-model:searchInput="searchInput" />
     </div>
     <div class="list">
-        <RouterView />
-        <StyledButton v-if="!results" v-bind="backButton" />
+        <List />
     </div>
-    <div v-if="results" class="footerButtons">
+    <div v-if="results || selectedView === 'favorites'" class="footerButtons">
         <StyledButton v-bind="allButton" />
         <StyledButton v-bind="favoritesButton" />
     </div>
@@ -17,15 +16,16 @@ import { RouterView } from 'vue-router'
 import { mapActions } from 'pinia'
 import { usePokemonStore } from '@/stores/pokemon.js'
 
-import { StyledButton, StyledInput } from '@/components/Inputs';
+import { List, StyledButton, StyledInput } from '@/components/';
 
 export default {
     name: 'BaseLayout',
-    components: { RouterView, StyledInput, StyledButton },
+    components: { RouterView, StyledInput, StyledButton, List },
     data() {
         return {
             searchInput: "",
             results: false,
+            selectedView: 'list',
             allButton: {
                 buttonStyles: {
                     height: "44px",
@@ -34,7 +34,8 @@ export default {
                 },
                 buttonText: "All",
                 buttonIcon: "/src/assets/icons/list-items.svg",
-                buttonAction: () => { }
+                buttonAction: this.handleListChange,
+                disabled: true,
             },
             favoritesButton: {
                 buttonStyles: {
@@ -44,18 +45,7 @@ export default {
                 },
                 buttonText: "Favorites",
                 buttonIcon: "/src/assets/icons/favorites-star.svg",
-                buttonAction: () => { }
-            },
-            backButton: {
-                buttonStyles: {
-                    height: "44px",
-                    width: "155px",
-                    fontSize: "18px",
-                    padding: "14px",
-                    marginTop: "25px"
-                },
-                buttonText: "Go back home",
-                buttonAction: this.redirectHomeHandler
+                buttonAction: this.handleListChange
             },
         }
     },
@@ -66,12 +56,9 @@ export default {
     },
     methods: {
         ...mapActions(usePokemonStore, ['getAndFormatAllPokemon', 'filterPokemon']),
-        redirectHomeHandler() {
-            this.$router.push({ name: 'welcomeLanding' })
-        },
-        onInputChange() {
-
-        },
+        handleListChange() {
+            this.selectedView === "list" ? this.selectedView = "favorites" : this.selectedView = "list"
+        }
     },
     watch: {
         filteredPokemon(val) {
@@ -79,7 +66,32 @@ export default {
             else this.results = false
         },
         searchInput(val) {
-            this.filterPokemon(val, "list")
+            this.filterPokemon(val, this.selectedView)
+        },
+        selectedView(val) {
+            console.log("selectedView modified")
+            this.filterPokemon(this.searchInput, val)
+            if (val === 'list') {
+                this.allButton = {
+                    ...this.allButton,
+                    disabled: true,
+                }
+
+                this.favoritesButton = {
+                    ...this.favoritesButton,
+                    disabled: false,
+                }
+            } else {
+                this.allButton = {
+                    ...this.allButton,
+                    disabled: false,
+                }
+
+                this.favoritesButton = {
+                    ...this.favoritesButton,
+                    disabled: true,
+                }
+            }
         }
     },
     created() {
