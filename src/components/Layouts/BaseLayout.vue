@@ -14,6 +14,9 @@
 
 <script>
 import { RouterView } from 'vue-router'
+import { mapActions } from 'pinia'
+import { usePokemonStore } from '@/stores/pokemon.js'
+
 import { StyledButton, StyledInput } from '@/components/Inputs';
 
 export default {
@@ -56,19 +59,28 @@ export default {
             },
         }
     },
+    computed: {
+        filteredPokemon() {
+            return usePokemonStore().filteredPokemon
+        },
+    },
     methods: {
+        ...mapActions(usePokemonStore, ['getAndFormatAllPokemon',]),
         redirectHomeHandler() {
             this.$router.push({ name: 'welcomeLanding' })
         },
         onInputChange() {
 
         },
-        getAllPokemons() {
-            // Lógica para traer los pókemon buscados al endpoint de pokeAPI y mostrarlos
+    },
+    watch: {
+        filteredPokemon(val) {
+            if (val.length) this.results = true
+            else this.results = false
         }
     },
     created() {
-
+        this.getAndFormatAllPokemon()
     }
 }
 </script>
@@ -79,7 +91,9 @@ export default {
 }
 
 .list {
-    margin: 50px 30px;
+    margin: 50px 30px 80px 30px;
+    overflow: scroll;
+    place-content: baseline;
 }
 
 .footerButtons {

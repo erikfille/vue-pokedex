@@ -1,7 +1,7 @@
 <template>
-    <div v-if="searchResults">
-        <div v-for="result in searchResults">
-            <ListCard v-bind="result" :key="result.id" />
+    <div v-if="filteredPokemon">
+        <div v-for="pokemon in filteredPokemon">
+            <ListCard v-bind="pokemon" :key="pokemon.id" />
         </div>
     </div>
     <div v-else class="errorMessage">
@@ -12,7 +12,10 @@
 </template>
 
 <script>
-import ListCard from '../../components/Cards/ListCard.vue';
+import { mapState, storeToRefs } from 'pinia'
+import { usePokemonStore } from '@/stores/pokemon.js'
+import Loader from '@/components/Loader/Loader.vue'
+import ListCard from '@/components/Cards/ListCard.vue';
 
 export default {
     name: "List",
@@ -29,14 +32,18 @@ export default {
             }],
         };
     },
-    methods: {
-        addFavorite() {
-            // Lógica para guardar un pokemon en favorito
+    computed: {
+        filteredPokemon() {
+            return usePokemonStore().filteredPokemon;
         },
-        getPokemonDetails() {
-            // Logica para traer la info de un pókemon específico y disparar el modal de detalle
-        }
     },
+    methods: {
+    },
+    mounted() {
+        console.log('Componente montado');
+        // Puedes verificar aquí si los datos se han cargado correctamente.
+        console.log("Filtered Pokemon", this.filteredPokemon)
+    }
 };
 </script>
 
