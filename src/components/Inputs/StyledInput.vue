@@ -18,7 +18,8 @@ export default {
         inputAction: {
             type: Function,
             default: () => { }
-        }
+        },
+        disabled: { default: false }
     },
     data() {
         return {
@@ -29,9 +30,6 @@ export default {
         updateSearchInput(e) {
             this.$emit('update:searchInput', e.target.value)
         }
-    },
-    created() {
-
     },
 };
 </script>

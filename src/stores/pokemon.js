@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-import { getAllPokemons } from '@/services/modules/pokemonServices'
+import { getAllPokemons, getPokemonByName } from '@/services/modules/pokemonServices'
 
 export const usePokemonStore = defineStore('pokemon', () => {
   const allPokemon = ref([])
@@ -20,21 +20,33 @@ export const usePokemonStore = defineStore('pokemon', () => {
         })
       }
       filteredPokemon.value = allPokemon.value
-
-      console.log('allPokemon', allPokemon.value)
-      console.log('allPokemon', filteredPokemon.value)
     } catch (err) {
       console.log(err)
     }
   }
 
-  const filterPokemon = (search) => {
+  const filterPokemon = (search, type) => {
     // LÓGICA PARA FILTRAR POKEMONS
-    filteredPokemon.value = allPokemon.filter((p) =>
-      p.name.toLowerCase().includes(search.toLowerCase())
-    )
 
-    console.log('filteredPokemon', filteredPokemon.value)
+    console.log('search filter', search)
+
+    if (type === 'list') {
+      filteredPokemon.value = allPokemon.value
+
+      filteredPokemon.value = allPokemon.value.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+
+    if (type === 'favorites') {
+      filteredPokemon.value = favoritePokemon.value
+
+      console.log("filteredPokemon", filteredPokemon.value)
+
+      filteredPokemon.value = favoritePokemon.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
   }
 
   const addFavorite = (id) => {
@@ -47,15 +59,20 @@ export const usePokemonStore = defineStore('pokemon', () => {
     this.favoritePokemon.filter((f) => f !== id)
   }
 
-  const getPokemonDetails = async (id) => {
+  const getPokemonDetails = async (name) => {
     // Logica para traer la info de un pókemon específico y disparar el modal de detalle
-    // this.pokemonDetail = await getPokemonDetails(id)
+    let pokemon = await getPokemonByName(name)
+
+    console.log('pokemon', pokemon)
+
+    this.pokemonDetail.value = pokemon
   }
 
   return {
     allPokemon,
     favoritePokemon,
     filteredPokemon,
+    pokemonDetail,
     getAndFormatAllPokemon,
     filterPokemon,
     addFavorite,

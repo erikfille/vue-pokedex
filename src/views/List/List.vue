@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, storeToRefs } from 'pinia'
+import { mapState } from 'pinia'
 import { usePokemonStore } from '@/stores/pokemon.js'
 import Loader from '@/components/Loader/Loader.vue'
 import ListCard from '@/components/Cards/ListCard.vue';

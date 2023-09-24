@@ -65,7 +65,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(usePokemonStore, ['getAndFormatAllPokemon',]),
+        ...mapActions(usePokemonStore, ['getAndFormatAllPokemon', 'filterPokemon']),
         redirectHomeHandler() {
             this.$router.push({ name: 'welcomeLanding' })
         },
@@ -77,6 +77,9 @@ export default {
         filteredPokemon(val) {
             if (val.length) this.results = true
             else this.results = false
+        },
+        searchInput(val) {
+            this.filterPokemon(val, "list")
         }
     },
     created() {
@@ -87,13 +90,17 @@ export default {
 
 <style scoped>
 .searchInput {
+    position: fixed;
+    top: 0;
     margin: 35px 30px 0px 30px;
 }
 
 .list {
-    margin: 50px 30px 80px 30px;
-    overflow: scroll;
-    place-content: baseline;
+    align-items: flex-start;
+    margin: 125px 30px 80px 30px;
+    overflow-y: scroll;
+    place-content: flex-start;
+    justify-content: flex-start;
 }
 
 .footerButtons {
@@ -101,6 +108,7 @@ export default {
     bottom: 0;
     width: 100%;
     flex-direction: row;
+    justify-content: center;
     gap: 15px;
     height: 80px;
 

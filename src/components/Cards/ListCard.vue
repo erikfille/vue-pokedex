@@ -6,6 +6,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import { usePokemonStore } from '../../stores/pokemon';
+
 export default {
     name: "ListCard",
     props: {
@@ -19,6 +22,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(usePokemonStore, ['filterPokemon',]),
         setFavoriteIcon() {
             if (this.isFavorite) {
                 this.icon = '/src/assets/icons/favorite-selected.svg'
@@ -27,8 +31,6 @@ export default {
     },
     created() {
         this.setFavoriteIcon()
-
-        console.log("props", this.$props)
     }
 };
 </script>
