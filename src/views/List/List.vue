@@ -1,24 +1,35 @@
 <template>
-    <div v-if="Array.isArray(searchResults)">
+    <div v-if="searchResults">
+        <div v-for="result in searchResults">
+            <ListCard v-bind="result" :key="result.id" />
+        </div>
     </div>
     <div v-else class="errorMessage">
         <h1>Uh-oh!</h1>
         <h3>You look lost on your journey!</h3>
+        <StyledButton v-if="!searchResults" v-bind="backButton" />
     </div>
 </template>
 
 <script>
+import ListCard from '../../components/Cards/ListCard.vue';
+
 export default {
     name: "List",
+    components: { ListCard },
+    props: {
+    },
     data() {
         return {
-            searchResults: { default: "" },
+            searchResults: [{
+                title: "Bulbasaur",
+                isFavorite: true,
+                id: 123,
+                key: 123
+            }],
         };
     },
     methods: {
-        getPokemon() {
-            // Lógica para traer los pókemon buscados al endpoint de pokeAPI
-        },
         addFavorite() {
             // Lógica para guardar un pokemon en favorito
         },

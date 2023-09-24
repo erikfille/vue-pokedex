@@ -53,7 +53,6 @@ export default {
 .welcomeDescription {
     color: var(--color-text);
     text-align: center;
-    font-family: Lato;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;

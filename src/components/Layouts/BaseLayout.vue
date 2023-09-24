@@ -4,9 +4,9 @@
     </div>
     <div class="list">
         <RouterView />
-        <StyledButton v-if="!searchResults.length" v-bind="backButton" />
+        <StyledButton v-if="!results" v-bind="backButton" />
     </div>
-    <div v-if="searchResults.length" class="footerButtons">
+    <div v-if="results" class="footerButtons">
         <StyledButton v-bind="allButton" />
         <StyledButton v-bind="favoritesButton" />
     </div>
@@ -22,7 +22,7 @@ export default {
     data() {
         return {
             searchInput: "",
-            searchResults: [],
+            results: false,
             allButton: {
                 buttonStyles: {
                     height: "44px",
@@ -62,9 +62,12 @@ export default {
         },
         onInputChange() {
 
+        },
+        getAllPokemons() {
+            // Lógica para traer los pókemon buscados al endpoint de pokeAPI y mostrarlos
         }
     },
-    computed: {
+    created() {
 
     }
 }

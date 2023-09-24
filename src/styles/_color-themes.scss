@@ -3,7 +3,8 @@
 /* LIGHT THEME */
 :root {
   /* ! EDITAR */
-  --color-absolute-white: var(--vt-c-absolute-white) --color-background: var(--vt-c-white);
+  --color-absolute-white: var(--vt-c-absolute-white);
+  --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
 
@@ -14,6 +15,8 @@
   --color-text: var(--vt-c-text-light-1);
   --color-text-bold: var(--vt-c-text-light-2);
 
+  --color-text-black: var(--vt-c-black);
+
   /* Button Colors */
   --color-button-background: var(--vt-c-red-mute);
   --color-disabled: var(--vt-c-divider-light-1);
@@ -21,23 +24,21 @@
   --color-button-text: var(--vt-c-text-light-4);
 
   /* Input variables */
-  --color-input-text: var(--vt-c-black);
   --color-placeholder: var(--vt-c-black-mute);
   --section-gap: 160px;
 }
 
 /* DARK THEME */
-@media (prefers-color-scheme: dark) {
-  /* ! EDITAR */
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --color-background: var(--vt-c-black);
+//     --color-background-soft: var(--vt-c-black-soft);
+//     --color-background-mute: var(--vt-c-black-mute);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+//     --color-border: var(--vt-c-divider-dark-2);
+//     --color-border-hover: var(--vt-c-divider-dark-1);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
+//     --color-heading: var(--vt-c-text-dark-1);
+//     --color-text: var(--vt-c-text-dark-2);
+//   }
+// }
