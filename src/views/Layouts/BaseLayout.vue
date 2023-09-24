@@ -3,10 +3,9 @@
         <StyledInput v-model:searchInput="searchInput" />
     </div>
     <div class="list">
-        <RouterView />
-        <StyledButton v-if="!results" v-bind="backButton" />
+        <List />
     </div>
-    <div v-if="results" class="footerButtons">
+    <div v-if="results || selectedView === 'favorites'" class="footerButtons">
         <StyledButton v-bind="allButton" />
         <StyledButton v-bind="favoritesButton" />
     </div>
@@ -17,15 +16,16 @@ import { RouterView } from 'vue-router'
 import { mapActions } from 'pinia'
 import { usePokemonStore } from '@/stores/pokemon.js'
 
-import { StyledButton, StyledInput } from '@/components/Inputs';
+import { List, StyledButton, StyledInput } from '@/components/';
 
 export default {
     name: 'BaseLayout',
-    components: { RouterView, StyledInput, StyledButton },
+    components: { RouterView, StyledInput, StyledButton, List },
     data() {
         return {
             searchInput: "",
             results: false,
+            selectedView: 'list',
             allButton: {
                 buttonStyles: {
                     height: "44px",
@@ -34,7 +34,8 @@ export default {
                 },
                 buttonText: "All",
                 buttonIcon: "/src/assets/icons/list-items.svg",
-                buttonAction: () => { }
+                buttonAction: this.handleListChange,
+                disabled: true,
             },
             favoritesButton: {
                 buttonStyles: {
@@ -44,18 +45,7 @@ export default {
                 },
                 buttonText: "Favorites",
                 buttonIcon: "/src/assets/icons/favorites-star.svg",
-                buttonAction: () => { }
-            },
-            backButton: {
-                buttonStyles: {
-                    height: "44px",
-                    width: "155px",
-                    fontSize: "18px",
-                    padding: "14px",
-                    marginTop: "25px"
-                },
-                buttonText: "Go back home",
-                buttonAction: this.redirectHomeHandler
+                buttonAction: this.handleListChange
             },
         }
     },
@@ -65,18 +55,43 @@ export default {
         },
     },
     methods: {
-        ...mapActions(usePokemonStore, ['getAndFormatAllPokemon',]),
-        redirectHomeHandler() {
-            this.$router.push({ name: 'welcomeLanding' })
-        },
-        onInputChange() {
-
-        },
+        ...mapActions(usePokemonStore, ['getAndFormatAllPokemon', 'filterPokemon']),
+        handleListChange() {
+            this.selectedView === "list" ? this.selectedView = "favorites" : this.selectedView = "list"
+        }
     },
     watch: {
         filteredPokemon(val) {
             if (val.length) this.results = true
             else this.results = false
+        },
+        searchInput(val) {
+            this.filterPokemon(val, this.selectedView)
+        },
+        selectedView(val) {
+            console.log("selectedView modified")
+            this.filterPokemon(this.searchInput, val)
+            if (val === 'list') {
+                this.allButton = {
+                    ...this.allButton,
+                    disabled: true,
+                }
+
+                this.favoritesButton = {
+                    ...this.favoritesButton,
+                    disabled: false,
+                }
+            } else {
+                this.allButton = {
+                    ...this.allButton,
+                    disabled: false,
+                }
+
+                this.favoritesButton = {
+                    ...this.favoritesButton,
+                    disabled: true,
+                }
+            }
         }
     },
     created() {
@@ -87,13 +102,17 @@ export default {
 
 <style scoped>
 .searchInput {
+    position: fixed;
+    top: 0;
     margin: 35px 30px 0px 30px;
 }
 
 .list {
-    margin: 50px 30px 80px 30px;
-    overflow: scroll;
-    place-content: baseline;
+    align-items: flex-start;
+    margin: 125px 30px 80px 30px;
+    overflow-y: scroll;
+    place-content: flex-start;
+    justify-content: flex-start;
 }
 
 .footerButtons {
@@ -101,6 +120,7 @@ export default {
     bottom: 0;
     width: 100%;
     flex-direction: row;
+    justify-content: center;
     gap: 15px;
     height: 80px;
 

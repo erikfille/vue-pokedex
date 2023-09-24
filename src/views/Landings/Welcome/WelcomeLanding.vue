@@ -10,8 +10,7 @@
 
 <script>
 import pikachuWelcomeImg from "@/assets/images/pikachu-welcome.png"
-import { StyledButton } from '@/components/Inputs'
-
+import { StyledButton } from '@/components/'
 
 export default {
     name: "WelcomeLanding",
@@ -24,7 +23,7 @@ export default {
     },
     methods: {
         redirectHandler() {
-            this.$router.push({ name: 'list' })
+            this.$router.push({ name: 'app' })
         }
     }
 };
