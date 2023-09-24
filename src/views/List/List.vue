@@ -39,11 +39,6 @@ export default {
     },
     methods: {
     },
-    mounted() {
-        console.log('Componente montado');
-        // Puedes verificar aquí si los datos se han cargado correctamente.
-        console.log("Filtered Pokemon", this.filteredPokemon)
-    }
 };
 </script>
 
