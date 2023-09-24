@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         redirectHandler() {
-            this.$router.push({ name: 'List' })
+            this.$router.push({ name: 'list' })
         }
     }
 };
