@@ -1,0 +1,45 @@
+:root {
+  --vt-c-absolute-white: #fff;
+
+  --vt-c-white: #f9f9f9;
+  --vt-c-white-soft: #f5f5f5;
+  --vt-c-white-mute: #e8e8e8;
+
+  --vt-c-black: #353535;
+  --vt-c-black-soft: #5e5e5e;
+  --vt-c-black-mute: #bfbfbf;
+
+  --vt-c-yellow: #eca539;
+  --vt-c-red: #c00e20;
+  --vt-c-red-mute: #f22539;
+
+  /* ! EDITAR */
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-black-soft);
+  --vt-c-text-light-2: var(--vt-c-black);
+  --vt-c-text-light-3: var(--vt-c-black-mute);
+  --vt-c-text-light-4: var(--vt-c-absolute-white);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+/* 
+Paleta:
+
+Amarillo: #ECA539
+Rojo Presionado: #C00E20
+Rojo Seleccionado/Active: #F22539
+
+Escala de grises:
+Gris oscuro: #353535
+Gris oscuro-claro: #5E5E5E
+Gris claro: #BFBFBF
+
+Blanco oscuro: #E8E8E8 
+Blanco intermedio: #F5F5F5
+Blanco: #F9F9F9
+*/
