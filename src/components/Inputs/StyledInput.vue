@@ -1,8 +1,9 @@
 <template>
     <div class="inputContainer">
         <img v-if="icon" class="inputIcon" :src="icon" alt="icon" />
-        <input class="styledInput" :style="inputStyles" :placeholder="placeholder" :disabled="disabled"
-            @click="() => handleInputChange()" />
+        <input class="styledInput" :value="searchInput" @input="$emit('update:searchInput', $event.target.value)"
+            :style="inputStyles" :placeholder="placeholder" :disabled="disabled" />
+
     </div>
 </template>
 
@@ -10,8 +11,8 @@
 export default {
     name: "StyledInput",
     props: {
-        name: { default: "styledInput" },
-        inputStyles: { width: "315px", height: "50px" },
+        searchInput: { type: String },
+        inputStyles: { default: { width: "315px", height: "50px" } },
         placeholder: { default: "Search" },
         icon: { default: "/src/assets/icons/looking-glass.svg" },
         inputAction: {
@@ -25,8 +26,8 @@ export default {
         };
     },
     methods: {
-        handleInputChange() {
-            this.inputAction()
+        updateSearchInput(e) {
+            this.$emit('update:searchInput', e.target.value)
         }
     },
     created() {

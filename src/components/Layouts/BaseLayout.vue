@@ -1,13 +1,14 @@
 <template>
     <div class="searchInput">
-        <StyledInput />
+        <StyledInput v-model:searchInput="searchInput" />
     </div>
     <div class="list">
         <RouterView />
+        <StyledButton v-if="!searchResults.length" v-bind="backButton" />
     </div>
-    <div class="footerButtons">
-        <StyledButton :buttonStyles="buttonStyles" v-bind="button1" />
-        <StyledButton :buttonStyles="buttonStyles" v-bind="button2" />
+    <div v-if="searchResults.length" class="footerButtons">
+        <StyledButton v-bind="allButton" />
+        <StyledButton v-bind="favoritesButton" />
     </div>
 </template>
 
@@ -20,26 +21,48 @@ export default {
     components: { RouterView, StyledInput, StyledButton },
     data() {
         return {
-            buttonStyles: {
-                height: "44px",
-                width: "150px",
-                fontSize: "18px",
-                flexShrink: "0"
-            },
-            button1: {
+            searchInput: "",
+            searchResults: [],
+            allButton: {
+                buttonStyles: {
+                    height: "44px",
+                    width: "150px",
+                    fontSize: "18px",
+                },
                 buttonText: "All",
                 buttonIcon: "/src/assets/icons/list-items.svg",
                 buttonAction: () => { }
             },
-            button2: {
+            favoritesButton: {
+                buttonStyles: {
+                    height: "44px",
+                    width: "150px",
+                    fontSize: "18px",
+                },
                 buttonText: "Favorites",
                 buttonIcon: "/src/assets/icons/favorites-star.svg",
                 buttonAction: () => { }
             },
+            backButton: {
+                buttonStyles: {
+                    height: "44px",
+                    width: "155px",
+                    fontSize: "18px",
+                    padding: "14px",
+                    marginTop: "25px"
+                },
+                buttonText: "Go back home",
+                buttonAction: this.redirectHomeHandler
+            },
         }
     },
     methods: {
+        redirectHomeHandler() {
+            this.$router.push({ name: 'welcomeLanding' })
+        },
+        onInputChange() {
 
+        }
     },
     computed: {
 
@@ -53,7 +76,7 @@ export default {
 }
 
 .list {
-    margin: 0 30px;
+    margin: 50px 30px;
 }
 
 .footerButtons {
