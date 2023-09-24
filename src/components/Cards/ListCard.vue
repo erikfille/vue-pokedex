@@ -1,6 +1,6 @@
 <template>
     <div class="cardContainer">
-        <h1 class="title">{{ title }}</h1>
+        <h1 class="title">{{ name }}</h1>
         <img :src="icon" alt="" />
     </div>
 </template>
@@ -9,7 +9,7 @@
 export default {
     name: "ListCard",
     props: {
-        title: { default: "Bulbasaur" },
+        name: { default: "Bulbasaur" },
         isFavorite: { default: false },
         id: "1",
     },
@@ -27,6 +27,8 @@ export default {
     },
     created() {
         this.setFavoriteIcon()
+
+        console.log("props", this.$props)
     }
 };
 </script>
@@ -38,6 +40,8 @@ export default {
     border-radius: 5px;
     background: var(--color-absolute-white);
     padding: 17px 10px 17px 20px;
+
+    margin-bottom: 10px;
 
     width: 315px;
     height: 60px;
