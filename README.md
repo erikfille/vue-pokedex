@@ -1,6 +1,6 @@
 # vue-pokedex
 
-This template should help get you started developing with Vue 3 in Vite.
+Here you can find information about project tech stack and scripts for running it on local.
 
 ## Project Setup
 
