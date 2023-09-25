@@ -4,6 +4,8 @@ Here you can find information about project tech stack and scripts for running i
 
 ## Project Setup
 
+> This project was created with Node.js V.19.9.0
+
 ```sh
 npm install
 ```
