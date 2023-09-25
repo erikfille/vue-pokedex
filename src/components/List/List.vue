@@ -1,5 +1,5 @@
 <template>
-    <div v-if="filteredPokemon.length > 0">
+    <div class="listContainer" v-if="filteredPokemon.length > 0">
         <div v-for="pokemon in filteredPokemon">
             <ListCard v-bind="pokemon" :key="pokemon.id" />
         </div>
@@ -18,8 +18,6 @@ import { Loader, ListCard, StyledButton } from '@/components'
 export default {
     name: "List",
     components: { Loader, ListCard, StyledButton },
-    props: {
-    },
     data() {
         return {
             searchResults: [{
@@ -56,6 +54,10 @@ export default {
 </script>
 
 <style scoped>
+.listContainer {
+    height: 100%;
+}
+
 .errorMessage {
     gap: 4px;
 }
