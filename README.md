@@ -2,14 +2,6 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
@@ -22,20 +14,29 @@ npm install
 npm run dev
 ```
 
+| If you want to compile and immediatly open your default web client, use `npm start` instead.
+
 ### Compile and Minify for Production
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Run Production Preview (after compiling)
 
 ```sh
-npm run test:unit
+npm run preview
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Technologies
 
-```sh
-npm run lint
-```
+This project has been created using:
+
+- Vue + Vite
+- Vue.js V.3
+- Vue Router V.4
+- Pinia (for global state management)
+- Axios
+- Sass
+
+It also includes `viteCompression` plugin for reducing bundle size in large projects
