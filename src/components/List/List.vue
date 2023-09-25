@@ -53,12 +53,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.listContainer {
-    height: 100%;
-}
-
-.errorMessage {
-    gap: 4px;
-}
-</style>
+<style src="./list.scss" scoped></style>

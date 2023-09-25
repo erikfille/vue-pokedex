@@ -38,13 +38,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.styledButton {
-    position: relative;
-    padding: 11px 20px;
-    font-size: 17px;
-    line-height: 0%;
-    width: 130px;
-    height: 44px;
-}
-</style>
+<style src="./styled-button.scss" scoped></style>

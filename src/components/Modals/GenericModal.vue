@@ -1,6 +1,6 @@
 <template>
-    <div class="fullscreenBackground"></div>
-    <div class="genericModal">
+    <div :class="['fullscreenBackground', { 'active': showModal }]"></div>
+    <div :class="['genericModal', { 'active': showModal }]">
         <div class="header">
             <slot name="img"></slot>
         </div>
@@ -15,55 +15,11 @@
   
 <script>
 export default {
-    name: "GenericModal"
+    name: "GenericModal",
+    props: {
+        showModal: Boolean,
+    },
 }
 </script>
 
-<style scoped>
-.genericModal {
-    position: fixed;
-    top: calc(50% - 506px / 2);
-
-    width: 315px;
-    height: 506px;
-
-    justify-content: space-between;
-
-    border-radius: 5px;
-    background: var(--color-absolute-white);
-
-    z-index: 99;
-}
-
-.header {
-    position: absolute;
-}
-
-.details {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0px 30px;
-}
-
-.footer {
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-    margin: auto;
-}
-
-.fullscreenBackground {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 99;
-
-    cursor: pointer;
-}
-</style>
+<style src="./generic-modal.scss" scoped></style>

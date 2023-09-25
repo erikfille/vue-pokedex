@@ -13,7 +13,7 @@
             <StyledButton v-bind="allButton" />
             <StyledButton v-bind="favoritesButton" />
         </div>
-        <GenericModal v-if="pokemonDetails.id">
+        <GenericModal :showModal="pokemonDetails.id">
             <template #img>
                 <div class="imageContainer">
                     <img class="backgroundImage" src="/src/assets/images/modal-detail-character-background.jpg" />
@@ -72,6 +72,7 @@ export default {
             results: false,
             selectedView: 'list',
             showModal: false,
+            windowWidth: '',
             allButton: {
                 buttonStyles: {
                     height: "44px",
@@ -87,7 +88,7 @@ export default {
                 buttonStyles: {
                     height: "44px",
                     width: "150px",
-                    fontSize: "18px",
+                    fontSize: "18px"
                 },
                 buttonText: "Favorites",
                 buttonIcon: "/src/assets/icons/favorites-star.svg",
@@ -137,7 +138,48 @@ export default {
             console.log(this.pokemonDetails.isFavorite)
             this.pokemonDetails.isFavorite ? await this.removeFavorite(this.pokemonDetails.id) : await this.addFavorite(this.pokemonDetails.id);
         },
-
+        getButtonStyles() {
+            let styles
+            let modalButtonStyle
+            if (this.windowWidth >= 1024) {
+                styles = {
+                    height: "44px",
+                    width: "275px",
+                    fontSize: "18px",
+                }
+                modalButtonStyle = {
+                    height: "44px",
+                    width: "195px",
+                    fontSize: "17px",
+                    fontWeight: "700"
+                }
+            } else if (this.windowWidth < 1024) {
+                // No es necesario, pero queda declarado por si es necesario agregar otros tamaños
+                styles = {
+                    height: "44px",
+                    width: "150px",
+                    fontSize: "18px",
+                }
+                modalButtonStyle = {
+                    height: "44px",
+                    width: "195px",
+                    fontSize: "17px",
+                    fontWeight: "700"
+                }
+            }
+            this.allButton = {
+                ...this.allButton,
+                buttonStyles: styles,
+            }
+            this.favoritesButton = {
+                ...this.favoritesButton,
+                buttonStyles: styles,
+            }
+            this.favoritesButton = {
+                ...this.favoritesButton,
+                buttonStyles: styles,
+            }
+        }
     },
     watch: {
         filteredPokemon(val) {
@@ -178,107 +220,11 @@ export default {
         this.loading = true;
         this.getAndFormatAllPokemon()
         this.setModalEvent(this.clearPokemonDetails)
+        this.windowWidth = window.innerWidth
+        this.getButtonStyles()
         this.loading = false
     }
 }
 </script>
 
-<style scoped>
-.layoutContainer {
-    height: 100%;
-}
-
-.searchInput {
-    position: fixed;
-    top: 0;
-    margin: 35px 30px 0px 30px;
-}
-
-.list {
-    height: 75%;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 125px 30px 80px 30px;
-    place-content: flex-start;
-    overflow-y: scroll;
-
-    &.empty {
-        overflow-y: hidden;
-    }
-}
-
-.footerButtons {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-    height: 80px;
-
-    background: var(--color-absolute-white);
-    box-shadow: 0px -5px 4px 0px rgba(0, 0, 0, 0.05);
-}
-
-.imageContainer {
-    position: relative;
-    width: 315px;
-    height: 220px;
-    border-radius: 5px 5px 0 0;
-}
-
-.backgroundImage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-}
-
-.closeIcon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 2;
-}
-
-.pokemonImage {
-    position: absolute;
-    top: 5%;
-    left: auto;
-    z-index: 3;
-    width: auto;
-    height: 95%;
-    border-radius: 5px;
-}
-
-.detailsContainer {
-    margin-top: 220px;
-    width: 100%;
-}
-
-.element {
-    flex-direction: row;
-    width: 100%;
-    height: 47px;
-    border-bottom: 1px solid var(--color-separator);
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-
-    & h3 {
-        color: var(--color-text-soft-black);
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 150%;
-    }
-
-    & span {
-        color: var(--color-text-soft-black);
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 150%;
-    }
-}
-</style>
+<style src="./base-layout.scss" scoped/>
