@@ -18,15 +18,15 @@ export default {
     },
     data() {
         return {
-            icon: { default: "/src/assets/icons/favorite-unselected.svg" }
+            icon: { default: "./src/assets/icons/favorite-unselected.svg" }
         };
     },
     methods: {
         ...mapActions(usePokemonStore, ['addFavorite', 'removeFavorite', 'getAndFormatPokemonDetails']),
         setFavoriteIcon() {
             if (this.isFavorite) {
-                this.icon = '/src/assets/icons/favorite-selected.svg'
-            } else this.icon = '/src/assets/icons/favorite-unselected.svg'
+                this.icon = './src/assets/icons/favorite-selected.svg'
+            } else this.icon = './src/assets/icons/favorite-unselected.svg'
         },
         async setFavoriteHandler() {
             this.isFavorite ? await this.removeFavorite(this.id) : await this.addFavorite(this.id);

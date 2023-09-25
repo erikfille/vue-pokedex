@@ -17,7 +17,7 @@
 export default {
     name: "GenericModal",
     props: {
-        showModal: Boolean,
+        showModal: Number,
     },
 }
 </script>

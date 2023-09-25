@@ -10,14 +10,14 @@
             <List />
         </div>
         <div v-if="results || selectedView === 'favorites'" class="footerButtons">
-            <StyledButton v-bind="allButton" />
-            <StyledButton v-bind="favoritesButton" />
+            <StyledButton v-if="allButton" v-bind="allButton" />
+            <StyledButton v-if="favoritesButton" v-bind="favoritesButton" />
         </div>
         <GenericModal :showModal="pokemonDetails.id">
             <template #img>
                 <div class="imageContainer">
-                    <img class="backgroundImage" src="/src/assets/images/modal-detail-character-background.jpg" />
-                    <img class="closeIcon" src="/src/assets/icons/close-icon.svg" @click="closeModal" />
+                    <img class="backgroundImage" src="@/assets/images/modal-detail-character-background.jpg" />
+                    <img class="closeIcon" src="@/assets/icons/close-icon.svg" @click="closeModal" />
                     <img v-if="pokemonDetails.image" class="pokemonImage" :src="pokemonDetails.image" />
                 </div>
             </template>
@@ -56,7 +56,6 @@ import { Loader, List, StyledButton, StyledInput, GenericModal } from '@/compone
 import { copyToClipboard } from '@/utils/'
 
 export default {
-    loading: true,
     name: 'BaseLayout',
     components: {
         Loader,
@@ -67,11 +66,12 @@ export default {
     },
     data() {
         return {
+            loading: true,
             searchInput: "",
-            searchIcon: '/src/assets/icons/looking-glass.svg',
+            searchIcon: './src/assets/icons/looking-glass.svg',
             results: false,
             selectedView: 'list',
-            showModal: false,
+            showModal: 0,
             windowWidth: '',
             allButton: {
                 buttonStyles: {
@@ -80,7 +80,7 @@ export default {
                     fontSize: "18px",
                 },
                 buttonText: "All",
-                buttonIcon: "/src/assets/icons/list-items.svg",
+                buttonIcon: "./src/assets/icons/list-items.svg",
                 buttonAction: this.handleListChange,
                 disabled: true,
             },
@@ -91,7 +91,7 @@ export default {
                     fontSize: "18px"
                 },
                 buttonText: "Favorites",
-                buttonIcon: "/src/assets/icons/favorites-star.svg",
+                buttonIcon: "./src/assets/icons/favorites-star.svg",
                 buttonAction: this.handleListChange
             },
             modalButton: {
@@ -121,7 +121,7 @@ export default {
         },
         setModalEvent(callback) {
             document.addEventListener('keydown', function (event) {
-                if (event.keyCode === 27) {
+                if (event.key === 'Escape') {
                     callback()
                 }
             });
@@ -129,13 +129,22 @@ export default {
         closeModal() {
             this.clearPokemonDetails()
         },
-        copyPokemonAttributes() {
+        async copyPokemonAttributes() {
             const { name, weight, height, types } = this.pokemonDetails
             let pokemonAttributes = `Name: ${name}, Weight: ${weight}, Height: ${height}, Types: ${types}`
             copyToClipboard(pokemonAttributes)
+
+
+            let newModalButton = { ...this.modalButton };
+            newModalButton.buttonText = "Copied to clipboard!"
+            this.modalButton = newModalButton
+            this.loadDelay(2000).then(() => {
+                newModalButton.buttonText = "Share to my friends"
+                this.modalButton = { ...newModalButton }
+            }
+            );
         },
         async setFavoriteHandler() {
-            console.log(this.pokemonDetails.isFavorite)
             this.pokemonDetails.isFavorite ? await this.removeFavorite(this.pokemonDetails.id) : await this.addFavorite(this.pokemonDetails.id);
         },
         getButtonStyles() {
@@ -179,6 +188,13 @@ export default {
                 ...this.favoritesButton,
                 buttonStyles: styles,
             }
+        },
+        async loadDelay(milisec) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve();
+                }, milisec);
+            });
         }
     },
     watch: {
@@ -214,16 +230,22 @@ export default {
         },
         pokemonDetails(val) {
             this.filterPokemon(this.searchInput, this.selectedView)
-        }
+        },
     },
-    created() {
+    async created() {
         this.loading = true;
-        this.getAndFormatAllPokemon()
+        await this.getAndFormatAllPokemon()
         this.setModalEvent(this.clearPokemonDetails)
         this.windowWidth = window.innerWidth
         this.getButtonStyles()
-        this.loading = false
-    }
+
+        // Funcion para simular un delay en la carga y mostrar el loader
+        // Comentar estas lineas y descomentar this.loading = false para una carga inmediata
+        this.loadDelay(1000).then(() => {
+            this.loading = false;
+        })
+        // this.loading = false
+    },
 }
 </script>
 
