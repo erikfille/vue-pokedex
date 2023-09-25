@@ -1,6 +1,6 @@
 <template>
     <div class="cardContainer">
-        <h1 class="title">{{ name }}</h1>
+        <h1 class="title" @click="openDetailsModalHandler">{{ name }}</h1>
         <img :src="icon" alt="favorite" @click="setFavoriteHandler" />
     </div>
 </template>
@@ -22,23 +22,25 @@ export default {
         };
     },
     methods: {
-        ...mapActions(usePokemonStore, ['addFavorite', 'removeFavorite']),
+        ...mapActions(usePokemonStore, ['addFavorite', 'removeFavorite', 'getAndFormatPokemonDetails']),
         setFavoriteIcon() {
             if (this.isFavorite) {
                 this.icon = '/src/assets/icons/favorite-selected.svg'
             } else this.icon = '/src/assets/icons/favorite-unselected.svg'
         },
         async setFavoriteHandler() {
-            console.log("isFavorite", this.isFavorite, "id", this.id);
             this.isFavorite ? await this.removeFavorite(this.id) : await this.addFavorite(this.id);
             this.setFavoriteIcon()
+        },
+        openDetailsModalHandler() {
+            this.getAndFormatPokemonDetails(this.id)
         }
     },
     created() {
         this.setFavoriteIcon()
     },
     updated() {
-        console.log("updatedComponent", this.$props)
+        this.setFavoriteIcon()
     }
 };
 </script>
@@ -63,5 +65,6 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 }
 </style>

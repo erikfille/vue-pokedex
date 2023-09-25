@@ -8,7 +8,9 @@ export const usePokemonStore = defineStore('pokemon', () => {
   const favoritePokemon = ref([])
   const filteredPokemon = ref([])
   const pokemonDetail = ref({})
+
   const actualSearch = ref('')
+  const actualListView = ref('')
 
   const getAndFormatAllPokemon = async () => {
     try {
@@ -26,9 +28,17 @@ export const usePokemonStore = defineStore('pokemon', () => {
     }
   }
 
+  const getAndFormatPokemonDetails = async (name) => {
+    try {
+      pokemonDetail.value = await getPokemonByName(name, favoritePokemon.value)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const filterPokemon = (search, type) => {
-    // LÓGICA PARA FILTRAR POKEMONS
     actualSearch.value = search
+    actualListView.value = type
 
     if (type === 'list') {
       filteredPokemon.value = allPokemon.value
@@ -62,6 +72,10 @@ export const usePokemonStore = defineStore('pokemon', () => {
       if (p.id === id) p.isFavorite = true
       return p
     })
+
+    if (pokemonDetail.value.id === id) {
+      pokemonDetail.value = { ...pokemonDetail.value, isFavorite: true }
+    }
   }
 
   const removeFavorite = (id) => {
@@ -77,14 +91,23 @@ export const usePokemonStore = defineStore('pokemon', () => {
       return p
     })
 
-    filterPokemon(actualSearch.value, 'favorites')
+    if (pokemonDetail.value.id === id) {
+      pokemonDetail.value = { ...pokemonDetail.value, isFavorite: false }
+    }
+
+    if (favoritePokemon.value.length > 0 && actualListView.value === 'favorites')
+      filterPokemon(actualSearch.value, 'favorites')
+    else if (!favoritePokemon.value.length && actualListView.value === 'favorites')
+      filterPokemon(actualSearch.value, 'favorites')
+    else filterPokemon(actualSearch.value, 'list')
   }
 
-  const getPokemonDetails = async (name) => {
-    // Logica para traer la info de un pókemon específico y disparar el modal de detalle
-    let pokemon = await getPokemonByName(name)
-
-    this.pokemonDetail.value = pokemon
+  const clearPokemonDetails = async (id) => {
+    try {
+      pokemonDetail.value = {}
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return {
@@ -92,10 +115,13 @@ export const usePokemonStore = defineStore('pokemon', () => {
     favoritePokemon,
     filteredPokemon,
     pokemonDetail,
+    actualSearch,
+    actualListView,
     getAndFormatAllPokemon,
+    getAndFormatPokemonDetails,
     filterPokemon,
     addFavorite,
     removeFavorite,
-    getPokemonDetails
+    clearPokemonDetails
   }
 })

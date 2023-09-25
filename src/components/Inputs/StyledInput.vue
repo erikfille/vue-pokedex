@@ -60,5 +60,6 @@ export default {
     top: 16px;
     bottom: 16px;
     left: 15px;
+    z-index: 99;
 }
 </style>

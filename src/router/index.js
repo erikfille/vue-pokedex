@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Loader from '@/components/Loader/Loader.vue'
 import WelcomeLanding from '@/views/Landings/Welcome/WelcomeLanding.vue'
+import BaseLayout from '@/views/Layouts/BaseLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,7 +16,7 @@ const router = createRouter({
     {
       path: '/app',
       name: 'app',
-      component: () => import('@/views/Layouts/BaseLayout.vue'),
+      component: BaseLayout
     }
   ],
   loading: Loader
