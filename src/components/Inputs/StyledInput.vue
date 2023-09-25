@@ -34,32 +34,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.inputContainer {
-    position: relative;
-    width: 315px;
-    height: 50px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 5px;
-    background: var(--color-background);
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.04);
-}
-
-.styledInput {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    padding: 14px 15px 14px 45px;
-}
-
-.inputIcon {
-    position: absolute;
-    top: 16px;
-    bottom: 16px;
-    left: 15px;
-    z-index: 99;
-}
-</style>
+<style src="./styled-input.scss" scoped></style>

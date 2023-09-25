@@ -45,26 +45,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.cardContainer {
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 5px;
-    background: var(--color-absolute-white);
-    padding: 17px 10px 17px 20px;
-
-    margin-bottom: 10px;
-
-    width: 315px;
-    height: 60px;
-}
-
-.title {
-    color: var(--color-text-black);
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
-}
-</style>
+<style src="./list-card.scss" scoped></style>

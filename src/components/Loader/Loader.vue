@@ -10,27 +10,4 @@ export default {
 }
 </script>
 
-<style>
-.loaderContainer {
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
-.loader {
-    animation: loader-animation 0.5s linear infinite;
-}
-
-@keyframes loader-animation {
-    from {
-        transform: rotate(0deg);
-        /* Comienza la rotación desde 0 grados */
-    }
-
-    to {
-        transform: rotate(360deg);
-        /* Termina la rotación en 360 grados (una vuelta completa) */
-    }
-}
-</style>
+<style src="./loader.scss" scoped></style>
