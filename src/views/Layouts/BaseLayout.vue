@@ -10,14 +10,14 @@
             <List />
         </div>
         <div v-if="results || selectedView === 'favorites'" class="footerButtons">
-            <StyledButton v-bind="allButton" />
-            <StyledButton v-bind="favoritesButton" />
+            <StyledButton v-if="allButton" v-bind="allButton" />
+            <StyledButton v-if="favoritesButton" v-bind="favoritesButton" />
         </div>
         <GenericModal :showModal="pokemonDetails.id">
             <template #img>
                 <div class="imageContainer">
-                    <img class="backgroundImage" src="/src/assets/images/modal-detail-character-background.jpg" />
-                    <img class="closeIcon" src="/src/assets/icons/close-icon.svg" @click="closeModal" />
+                    <img class="backgroundImage" src="@/assets/images/modal-detail-character-background.jpg" />
+                    <img class="closeIcon" src="@/assets/icons/close-icon.svg" @click="closeModal" />
                     <img v-if="pokemonDetails.image" class="pokemonImage" :src="pokemonDetails.image" />
                 </div>
             </template>
@@ -68,7 +68,7 @@ export default {
     data() {
         return {
             searchInput: "",
-            searchIcon: '/src/assets/icons/looking-glass.svg',
+            searchIcon: './src/assets/icons/looking-glass.svg',
             results: false,
             selectedView: 'list',
             showModal: false,
@@ -80,7 +80,7 @@ export default {
                     fontSize: "18px",
                 },
                 buttonText: "All",
-                buttonIcon: "/src/assets/icons/list-items.svg",
+                buttonIcon: "./src/assets/icons/list-items.svg",
                 buttonAction: this.handleListChange,
                 disabled: true,
             },
@@ -91,7 +91,7 @@ export default {
                     fontSize: "18px"
                 },
                 buttonText: "Favorites",
-                buttonIcon: "/src/assets/icons/favorites-star.svg",
+                buttonIcon: "./src/assets/icons/favorites-star.svg",
                 buttonAction: this.handleListChange
             },
             modalButton: {
