@@ -19,3 +19,9 @@
   line-height: normal;
   cursor: pointer;
 }
+
+@media (min-width: 1024px) {
+  .cardContainer {
+    width: 570px;
+  }
+}

@@ -37,9 +37,10 @@
 
 .footer {
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
   margin: auto;
+  padding: 0px 30px;
 }
 
 .fullscreenBackground {
@@ -60,5 +61,11 @@
   &.active {
     opacity: 1; /* Opacidad al 100% */
     z-index: 99;
+  }
+}
+
+@media (min-width: 1024px) {
+  .genericModal {
+    width: 570px;
   }
 }

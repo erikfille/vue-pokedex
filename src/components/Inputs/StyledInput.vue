@@ -12,7 +12,7 @@ export default {
     name: "StyledInput",
     props: {
         searchInput: { type: String },
-        inputStyles: { default: { width: "315px", height: "50px" } },
+        inputStyles: { default: { height: "50px" } },
         placeholder: { default: "Search" },
         icon: { default: "/src/assets/icons/looking-glass.svg" },
         inputAction: {

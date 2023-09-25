@@ -72,6 +72,7 @@ export default {
             results: false,
             selectedView: 'list',
             showModal: false,
+            windowWidth: '',
             allButton: {
                 buttonStyles: {
                     height: "44px",
@@ -87,7 +88,7 @@ export default {
                 buttonStyles: {
                     height: "44px",
                     width: "150px",
-                    fontSize: "18px",
+                    fontSize: "18px"
                 },
                 buttonText: "Favorites",
                 buttonIcon: "/src/assets/icons/favorites-star.svg",
@@ -137,7 +138,48 @@ export default {
             console.log(this.pokemonDetails.isFavorite)
             this.pokemonDetails.isFavorite ? await this.removeFavorite(this.pokemonDetails.id) : await this.addFavorite(this.pokemonDetails.id);
         },
-
+        getButtonStyles() {
+            let styles
+            let modalButtonStyle
+            if (this.windowWidth >= 1024) {
+                styles = {
+                    height: "44px",
+                    width: "275px",
+                    fontSize: "18px",
+                }
+                modalButtonStyle = {
+                    height: "44px",
+                    width: "195px",
+                    fontSize: "17px",
+                    fontWeight: "700"
+                }
+            } else if (this.windowWidth < 1024) {
+                // No es necesario, pero queda declarado por si es necesario agregar otros tamaños
+                styles = {
+                    height: "44px",
+                    width: "150px",
+                    fontSize: "18px",
+                }
+                modalButtonStyle = {
+                    height: "44px",
+                    width: "195px",
+                    fontSize: "17px",
+                    fontWeight: "700"
+                }
+            }
+            this.allButton = {
+                ...this.allButton,
+                buttonStyles: styles,
+            }
+            this.favoritesButton = {
+                ...this.favoritesButton,
+                buttonStyles: styles,
+            }
+            this.favoritesButton = {
+                ...this.favoritesButton,
+                buttonStyles: styles,
+            }
+        }
     },
     watch: {
         filteredPokemon(val) {
@@ -178,6 +220,8 @@ export default {
         this.loading = true;
         this.getAndFormatAllPokemon()
         this.setModalEvent(this.clearPokemonDetails)
+        this.windowWidth = window.innerWidth
+        this.getButtonStyles()
         this.loading = false
     }
 }

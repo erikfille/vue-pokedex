@@ -26,3 +26,13 @@
   line-height: 150%;
   margin-bottom: 50px;
 }
+
+@media (min-width: 1024px) {
+  .welcomeContainer {
+    max-width: 100%;
+  }
+
+  .welcomeDescription {
+    width: 570px;
+  }
+}
