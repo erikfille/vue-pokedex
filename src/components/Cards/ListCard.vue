@@ -9,6 +9,10 @@
 import { mapActions } from 'pinia';
 import { usePokemonStore } from '../../stores/pokemon';
 
+import favoriteSelected from '@/assets/icons/favorite-selected.svg?url'
+import favoriteUnselected from '@/assets/icons/favorite-unselected.svg?url'
+
+
 export default {
     name: "ListCard",
     props: {
@@ -18,15 +22,15 @@ export default {
     },
     data() {
         return {
-            icon: { default: "./src/assets/icons/favorite-unselected.svg" }
+            icon: { default: favoriteUnselected }
         };
     },
     methods: {
         ...mapActions(usePokemonStore, ['addFavorite', 'removeFavorite', 'getAndFormatPokemonDetails']),
         setFavoriteIcon() {
             if (this.isFavorite) {
-                this.icon = './src/assets/icons/favorite-selected.svg'
-            } else this.icon = './src/assets/icons/favorite-unselected.svg'
+                this.icon = favoriteSelected
+            } else this.icon = favoriteUnselected
         },
         async setFavoriteHandler() {
             this.isFavorite ? await this.removeFavorite(this.id) : await this.addFavorite(this.id);

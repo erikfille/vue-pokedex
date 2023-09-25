@@ -55,6 +55,10 @@ import { Loader, List, StyledButton, StyledInput, GenericModal } from '@/compone
 
 import { copyToClipboard } from '@/utils/'
 
+import lookingGlass from '@/assets/icons/looking-glass.svg?url'
+import listItems from '@/assets/icons/list-items.svg?url'
+import favoritesStar from '@/assets/icons/favorites-star.svg?url'
+
 export default {
     name: 'BaseLayout',
     components: {
@@ -68,7 +72,7 @@ export default {
         return {
             loading: true,
             searchInput: "",
-            searchIcon: './src/assets/icons/looking-glass.svg',
+            searchIcon: lookingGlass,
             results: false,
             selectedView: 'list',
             showModal: 0,
@@ -80,7 +84,7 @@ export default {
                     fontSize: "18px",
                 },
                 buttonText: "All",
-                buttonIcon: "./src/assets/icons/list-items.svg",
+                buttonIcon: listItems,
                 buttonAction: this.handleListChange,
                 disabled: true,
             },
@@ -91,7 +95,7 @@ export default {
                     fontSize: "18px"
                 },
                 buttonText: "Favorites",
-                buttonIcon: "./src/assets/icons/favorites-star.svg",
+                buttonIcon: favoritesStar,
                 buttonAction: this.handleListChange
             },
             modalButton: {

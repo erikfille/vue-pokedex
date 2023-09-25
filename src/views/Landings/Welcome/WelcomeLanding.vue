@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import pikachuWelcomeImg from "@/assets/images/pikachu-welcome.png"
+import pikachuWelcomeImg from "@/assets/images/pikachu-welcome.png?url"
 import { StyledButton } from '@/components/'
 
 export default {
