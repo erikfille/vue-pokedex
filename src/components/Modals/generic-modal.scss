@@ -55,11 +55,11 @@
 
   cursor: pointer;
 
-  opacity: 0; /* Inicialmente oculto */
+  opacity: 0;
   transition: opacity 0.3s ease;
 
   &.active {
-    opacity: 1; /* Opacidad al 100% */
+    opacity: 1;
     z-index: 99;
   }
 }

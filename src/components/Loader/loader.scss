@@ -12,11 +12,9 @@
 @keyframes loader-animation {
   from {
     transform: rotate(0deg);
-    /* Comienza la rotación desde 0 grados */
   }
 
   to {
     transform: rotate(360deg);
-    /* Termina la rotación en 360 grados (una vuelta completa) */
   }
 }
