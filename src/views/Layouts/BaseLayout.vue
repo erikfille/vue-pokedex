@@ -13,7 +13,7 @@
             <StyledButton v-bind="allButton" />
             <StyledButton v-bind="favoritesButton" />
         </div>
-        <GenericModal v-if="pokemonDetails.id">
+        <GenericModal :showModal="pokemonDetails.id">
             <template #img>
                 <div class="imageContainer">
                     <img class="backgroundImage" src="/src/assets/images/modal-detail-character-background.jpg" />

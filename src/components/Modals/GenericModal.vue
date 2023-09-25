@@ -1,6 +1,6 @@
 <template>
-    <div class="fullscreenBackground"></div>
-    <div class="genericModal">
+    <div :class="['fullscreenBackground', { 'active': showModal }]"></div>
+    <div :class="['genericModal', { 'active': showModal }]">
         <div class="header">
             <slot name="img"></slot>
         </div>
@@ -15,7 +15,10 @@
   
 <script>
 export default {
-    name: "GenericModal"
+    name: "GenericModal",
+    props: {
+        showModal: Boolean,
+    },
 }
 </script>
 
