@@ -41,7 +41,8 @@
                 <StyledButton v-bind="modalButton" />
                 <img v-if="pokemonDetails.isFavorite" src="@/assets/icons/favorite-selected.svg" alt="isFavorite"
                     @click="setFavoriteHandler">
-                <img v-else src="@/assets/icons/favorite-unselected.svg" alt="isFavorite" @click="setFavoriteHandler">
+                <img class="favoriteIcon" v-else src="@/assets/icons/favorite-unselected.svg" alt="isFavorite"
+                    @click="setFavoriteHandler">
             </template>
         </GenericModal>
     </div>
@@ -138,15 +139,13 @@ export default {
             let pokemonAttributes = `Name: ${name}, Weight: ${weight}, Height: ${height}, Types: ${types}`
             copyToClipboard(pokemonAttributes)
 
-
             let newModalButton = { ...this.modalButton };
             newModalButton.buttonText = "Copied to clipboard!"
             this.modalButton = newModalButton
             this.loadDelay(2000).then(() => {
                 newModalButton.buttonText = "Share to my friends"
                 this.modalButton = { ...newModalButton }
-            }
-            );
+            });
         },
         async setFavoriteHandler() {
             this.pokemonDetails.isFavorite ? await this.removeFavorite(this.pokemonDetails.id) : await this.addFavorite(this.pokemonDetails.id);
@@ -199,6 +198,9 @@ export default {
                     resolve();
                 }, milisec);
             });
+        },
+        setWindowWidth() {
+            this.windowWidth = window.innerWidth;
         }
     },
     watch: {
@@ -235,12 +237,15 @@ export default {
         pokemonDetails(val) {
             this.filterPokemon(this.searchInput, this.selectedView)
         },
+        windowWidth(val) {
+            this.getButtonStyles()
+        }
     },
     async created() {
         this.loading = true;
         await this.getAndFormatAllPokemon()
         this.setModalEvent(this.clearPokemonDetails)
-        this.windowWidth = window.innerWidth
+        window.addEventListener('resize', this.setWindowWidth);
         this.getButtonStyles()
 
         // Funcion para simular un delay en la carga y mostrar el loader
@@ -250,6 +255,9 @@ export default {
         })
         // this.loading = false
     },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.setWindowWidth);
+    }
 }
 </script>
 
