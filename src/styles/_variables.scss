@@ -1,5 +1,6 @@
 :root {
   --vt-c-absolute-white: #fff;
+  --vt-c-absolute-black: #161616;
 
   --vt-c-white: #f9f9f9;
   --vt-c-white-soft: #f5f5f5;
@@ -23,8 +24,11 @@
   --vt-c-text-light-2: var(--vt-c-black);
   --vt-c-text-light-3: var(--vt-c-black-mute);
   --vt-c-text-light-4: var(--vt-c-absolute-white);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --vt-c-text-dark-1: var(--vt-c-white-soft);
+  --vt-c-text-dark-2: var(--vt-c-white);
+  --vt-c-text-dark-3: var(--vt-c-white-mute);
+  --vt-c-text-dark-4: var(--vt-c-black-mute);
 }
 
 /* 

@@ -33,7 +33,8 @@
 /* DARK THEME */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
+    --color-background: var(--vt-c-absolute-black);
+    --color-absolute-white: var(--vt-c-black-soft);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
 
@@ -41,6 +42,22 @@
     --color-border-hover: var(--vt-c-divider-dark-1);
 
     --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-text: var(--vt-c-text-dark-1);
+    --color-text-bold: var(--vt-c-text-black-2);
+
+    --color-text-black: var(--vt-c-white);
+    --color-text-soft-black: var(--vt-c-white-soft);
+
+    --color-separator: var(--vt-c-white-mute);
+
+    /* Button Colors */
+    --color-button-background: var(--vt-c-red-mute);
+    --color-disabled: var(--vt-c-divider-dark-1);
+    --color-active-button: var(--vt-c-red);
+    --color-button-text: var(--vt-c-white-soft);
+
+    /* Input variables */
+    --color-placeholder: var(--vt-c-black-mute);
+    --section-gap: 160px;
   }
 }
