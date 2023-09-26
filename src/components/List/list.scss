@@ -3,5 +3,14 @@
 }
 
 .errorMessage {
+  & h1 {
+    color: var(--color-text-black)
+  }
+  
+  & h3 {
+    color: var(--color-text-soft-black);
+    font-weight: 400;
+    letter-spacing: 0.75;
+  }
   gap: 4px;
 }

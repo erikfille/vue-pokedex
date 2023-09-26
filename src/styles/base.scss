@@ -7,11 +7,13 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
+  font-family: 'Lato', sans-serif;
+  caret-color: transparent;
 }
 
 body {
   min-height: 100vh;
+  font-weight: normal;
 
   /* ! Custom Settings ---> */
   height: auto;
@@ -58,7 +60,7 @@ button {
   border-radius: 60px;
   cursor: pointer;
 
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   font-style: normal;
   color: var(--color-button-text);
@@ -96,6 +98,8 @@ input {
   font-style: normal;
   font-weight: 500;
   line-height: 140%;
+
+  caret-color: currentColor;
 
   &::placeholder {
     color: var(--color-placeholder);

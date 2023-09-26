@@ -1,7 +1,7 @@
 <template>
     <div class="cardContainer">
         <h1 class="title" @click="openDetailsModalHandler">{{ name }}</h1>
-        <img :src="icon" alt="favorite" @click="setFavoriteHandler" />
+        <img class="favoriteIcon" :src="icon" alt="favorite" @click="setFavoriteHandler" />
     </div>
 </template>
 
@@ -11,7 +11,6 @@ import { usePokemonStore } from '../../stores/pokemon';
 
 import favoriteSelected from '@/assets/icons/favorite-selected.svg?url'
 import favoriteUnselected from '@/assets/icons/favorite-unselected.svg?url'
-
 
 export default {
     name: "ListCard",
