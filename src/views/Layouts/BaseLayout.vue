@@ -142,7 +142,7 @@ export default {
             copyToClipboard(pokemonAttributes)
 
             let newModalButton = { ...this.modalButton };
-            newModalButton.buttonText = "Copied to clipboard!"
+            newModalButton.buttonText = "Copied!"
             this.modalButton = newModalButton
             this.loadDelay(2000).then(() => {
                 newModalButton.buttonText = "Share to my friends"
