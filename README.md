@@ -2,6 +2,10 @@
 
 Here you can find information about project tech stack and scripts for running it on local.
 
+## Considerations
+
+- This project can access the client theme, so if you have Dark Mode enabled, a modified version of the style will be displayed to match the black mode requirements. However, this project has been developed following a strict design created specifically for Light Mode, so it is recommended to disable Dark Mode, or, if you are running it locally, simply comment out the Dark Mode lines in `./src/styles/_color-themes.scss`.
+
 ## Project Setup
 
 > This project was created with Node.js V.19.9.0
