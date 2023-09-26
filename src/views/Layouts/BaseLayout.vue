@@ -1,8 +1,8 @@
 <template>
-    <div v-if="loading">
-        <Loader />
-    </div>
-    <div class="layoutContainer" v-else>
+    <div class="layoutContainer">
+        <div v-if="loading">
+            <Loader />
+        </div>
         <div class="searchInput">
             <StyledInput v-model:searchInput="searchInput" :icon="searchIcon" />
         </div>
@@ -71,7 +71,6 @@ export default {
     },
     data() {
         return {
-            loading: true,
             searchInput: "",
             searchIcon: lookingGlass,
             results: false,
@@ -118,6 +117,9 @@ export default {
         pokemonDetails() {
             return usePokemonStore().pokemonDetail
         },
+        loading() {
+            return usePokemonStore().loading
+        }
     },
     methods: {
         ...mapActions(usePokemonStore, ['getAndFormatAllPokemon', 'filterPokemon', 'clearPokemonDetails', 'addFavorite', 'removeFavorite']),
@@ -242,18 +244,10 @@ export default {
         }
     },
     async created() {
-        this.loading = true;
         await this.getAndFormatAllPokemon()
         this.setModalEvent(this.clearPokemonDetails)
         window.addEventListener('resize', this.setWindowWidth);
         this.getButtonStyles()
-
-        // Funcion para simular un delay en la carga y mostrar el loader
-        // Comentar estas lineas y descomentar this.loading = false para una carga inmediata
-        this.loadDelay(1000).then(() => {
-            this.loading = false;
-        })
-        // this.loading = false
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.setWindowWidth);

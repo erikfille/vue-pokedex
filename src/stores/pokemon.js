@@ -8,12 +8,14 @@ export const usePokemonStore = defineStore('pokemon', () => {
   const favoritePokemon = ref([])
   const filteredPokemon = ref([])
   const pokemonDetail = ref({})
+  const loading = ref(false)
 
   const actualSearch = ref('')
   const actualListView = ref('')
 
   const getAndFormatAllPokemon = async () => {
     try {
+      loading.value = true
       allPokemon.value = await getAllPokemons()
 
       if (favoritePokemon.length > 0 && allPokemon.length > 0) {
@@ -25,14 +27,19 @@ export const usePokemonStore = defineStore('pokemon', () => {
       filteredPokemon.value = allPokemon.value
     } catch (err) {
       console.log(err)
+    } finally {
+      loading.value = false
     }
   }
 
   const getAndFormatPokemonDetails = async (name) => {
     try {
+      loading.value = true
       pokemonDetail.value = await getPokemonByName(name, favoritePokemon.value)
     } catch (err) {
       console.log(err)
+    } finally {
+      loading.value = false
     }
   }
 
@@ -115,6 +122,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
     favoritePokemon,
     filteredPokemon,
     pokemonDetail,
+    loading,
     actualSearch,
     actualListView,
     getAndFormatAllPokemon,
