@@ -36,3 +36,9 @@
     width: 570px;
   }
 }
+
+@media (max-height: 768px) {
+  .welcomeContainer {
+    overflow-y: scroll;
+  }
+}
