@@ -40,5 +40,6 @@
 @media (max-height: 768px) {
   .welcomeContainer {
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
