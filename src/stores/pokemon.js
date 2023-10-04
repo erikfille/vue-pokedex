@@ -26,7 +26,7 @@ export const usePokemonStore = defineStore('pokemon', () => {
       }
       filteredPokemon.value = allPokemon.value
     } catch (err) {
-      console.log(err)
+      allPokemon.value = []
     } finally {
       loading.value = false
     }
@@ -37,7 +37,8 @@ export const usePokemonStore = defineStore('pokemon', () => {
       loading.value = true
       pokemonDetail.value = await getPokemonByName(name, favoritePokemon.value)
     } catch (err) {
-      console.log(err)
+      alert("Unexpected error: Can't get pokemon details") // Modificar luego creando y disparando un modal de error
+      pokemonDetail.value = {}
     } finally {
       loading.value = false
     }
